@@ -1,6 +1,29 @@
+<# 
+.Synopsis 
+   Restart-service restarts a service in a more Error-Verbose way. 
+.DESCRIPTION 
+   The Restart-service script is designed to be run by a schedule task. 
+   In addition restarting services it writes the result to a logfile. 
+.NOTES 
+   Created by: Daniel Gómez Villanueva @DanielGV 
+   Modified: 21/03/2016 10:00:00 AM   
+   Uses: Write-Log function by Jason Wasser @wasserja.
+
+   To Do: 
+    * Add error handling if trying to create a log file in a inaccessible location. 
+    * Add default parameter handling.
+.PARAMETER ServiceName 
+   ServiceName is the name of the service to be restarted.
+.PARAMETER Path 
+   The path to the log file to which you would like to write. By default the function will  
+   create the path and file if it does not exist.  
+.EXAMPLE 
+   Restart-Service -ServiceName 'TestService' -Path "D:\log\ServiceRestarter\TestService.log"  
+   Restarts TestService service and writes the result of the operation to  the message to  D:\log\ServiceRestarter\TestService.log. 
+#> 
 Param(
-    [Parameter(Mandatory=$True,Position=1)] [string] $serviceName,
-    [Parameter()] [string] $Path
+    [Parameter(Mandatory=$True,Position=1)] [string] $ServiceName,
+    [Parameter(Position=2)] [string] $Path
 )
 
 <# 
